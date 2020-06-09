@@ -1,17 +1,18 @@
 function [c, ceq] = nlcon(x)
-error = 0.005;
+global original_rho
 px = [0,1;1,0];
 pz = [1,0;0,-1];
 py = [0,-i;i,0];
-%evalx = trace(px*rho1);
-%evaly = trace(py*rho1);
-%evalz = trace(pz*rho1);
+evalx = trace(px*original_rho);
+evaly = trace(py*original_rho);
+evalz = trace(pz*original_rho);
+error = ((0.0001*rand)+(0.0001*rand)+(0.0001*rand))/3;
 c1 = 0;
-ceq1 = abs(x(1) - 0.467382549935270+error);
+ceq1 = abs(x(1) - evalx);
 c2 = 0;
-ceq2 = abs(x(2) - -0.883310492492032+error);
+ceq2 = abs(x(2) - evaly);
 c3 = 0;
-ceq3 = abs(x(3) - -0.036278449105357+error);
+ceq3 = abs(x(3) - evalz);
 c = [c1;c2;c3];
 ceq = [ceq1;ceq2;ceq3];
 
